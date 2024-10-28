@@ -28,6 +28,10 @@ names(likelihoods) <- summary(like)$component
 likelihoods$bhsteep <- likelihoods$effort_dev <- NULL
 likelihoods$catchability_dev <- likelihoods$tag_data <- NULL
 likelihoods$total <- likelihoods$weight_comp <- NULL
+# Read CPUE likelihood manually from test_plot_output
+dat <- readLines("model/test_plot_output")
+likelihoods$cpue <-
+  sum(read.table(text=dat[grep("# Survey_index_like_by_fishery", dat) + 1]))
 likelihoods$penalties <- obj_fun(par) - sum(likelihoods)
 
 # CPUE
