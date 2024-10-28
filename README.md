@@ -3,7 +3,7 @@
 Download ALB 2024 assessment report:
 
 - **Stock Assessment of South Pacific Albacore: 2024**\
-  **[WCPFC-SC20-2024/SA-WP-02]([https://meetings.wcpfc.int/node/19352](https://meetings.wcpfc.int/node/23119))**
+  **[WCPFC-SC20-2024/SA-WP-02](https://meetings.wcpfc.int/node/23119)**
 
 Download ALB 2024 diagnostic model:
 
