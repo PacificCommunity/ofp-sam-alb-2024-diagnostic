@@ -36,11 +36,16 @@ pred <- as.data.frame(cpue_pred(rep))
 names(obs)[names(obs) == "data"] <- "obs"
 names(pred)[names(pred) == "data"] <- "pred"
 cpue <- cbind(obs, pred["pred"])
-cpue <- cpue[cpue$unit %in% 33:37,]
-cpue$area <- as.integer(cpue$unit) - 32
+cpue <- cpue[cpue$unit %in% 18:20,]
+names(cpue)[names(cpue) == "unit"] <- "fishery"
+cpue$area <- NA_integer_
+cpue$fishery <- as.integer(cpue$fishery)
+cpue$area[cpue$fishery %in% 18:19] <- 1
+cpue$area[cpue$fishery == 20] <- 2
 cpue$obs <- exp(cpue$obs)
 cpue$pred <- exp(cpue$pred)
-cpue$age <- cpue$unit <- cpue$iter <- NULL
+cpue <- cpue[!is.na(cpue$obs),]  # remove unneeded rows
+cpue$age <- cpue$iter <- NULL    # remove unneeded columns
 
 # Length comps
 length.comps <- lenfits(lenfit)
