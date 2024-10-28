@@ -2,8 +2,7 @@
 
 ## Before: 09.par, catch.rep, plot-09.par.rep, (model), fisheries.csv (data)
 ## After:  biology.csv, biomass.csv, catch.csv, f_aggregate.csv, f_annual.csv,
-##         f_season.csv, f_stage.csv, natage.csv, selectivity.csv,
-##         summary.csv (output)
+##         f_stage.csv, natage.csv, selectivity.csv, summary.csv (output)
 
 library(TAF)
 taf.library(FLR4MFCL)
@@ -97,7 +96,6 @@ write.taf(biomass, dir="output")
 write.taf(catch, dir="output")
 write.taf(f.aggregate, dir="output")
 write.taf(f.annual, dir="output")
-write.taf(f.season, dir="output")
 write.taf(f.stage, dir="output")
 write.taf(natage, dir="output")
 write.taf(selectivity, dir="output")
