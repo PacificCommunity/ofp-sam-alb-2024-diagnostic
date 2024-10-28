@@ -26,8 +26,8 @@ names(laa)[names(laa) == "data"] <- "length"
 waa <- as.data.frame(mean_waa(rep))
 names(waa)[names(waa) == "data"] <- "weight"
 biology <- cbind(laa, waa["weight"])
+biology$age <- biology$age + 1 ## first age is 1 not 0
 biology$year <- biology$unit <- biology$area <- biology$iter <- NULL
-biology$age <- biology$age * 4 + as.integer(biology$season)
 biology$season <- NULL
 biology <- biology[order(biology$age),]
 biology$maturity <- mat(par)
@@ -35,7 +35,7 @@ biology$natmort <- m_at_age(rep)
 
 # Biomass
 biomass <- as.data.frame(adultBiomass(rep))
-biomass$age <- biomass$unit <- biomass$iter <- NULL
+biomass$age <- biomass$unit <- biomass$iter <- biomass$season <- NULL
 names(biomass)[names(biomass) == "data"] <- "ssb"
 
 # Catch
@@ -44,14 +44,7 @@ catch$age <- catch$iter <- NULL
 names(catch)[names(catch) == "unit"] <- "fishery"
 names(catch)[names(catch) == "data"] <- "t"
 catch$area <- fisheries$area[catch$fishery]
-catch <- catch[c("year", "season", "fishery", "area", "t")]
-
-# Fishing mortality: season
-f.season.all <- as.data.frame(fm_aggregated(rep))
-f.season.reg <- as.data.frame(fm(rep))
-f.season <- rbind(f.season.reg, f.season.all)
-names(f.season)[names(f.season) == "data"] <- "f"
-f.season$unit <- f.season$iter <- NULL
+catch <- catch[c("year", "fishery", "area", "t")]
 
 # Fishing mortality: annual
 f.annual.all <- as.data.frame(seasonSums(fm_aggregated(rep)))
@@ -73,13 +66,13 @@ f.stage <- rbind(f.adult, f.juven)[c("year", "area", "stage", "f")]
 # Fishing mortality: aggregate
 f.aggregate <- as.data.frame(AggregateF(rep))
 names(f.aggregate)[names(f.aggregate) == "data"] <- "f"
-f.aggregate <- f.aggregate[c("year", "season", "f")]
+f.aggregate <- f.aggregate[c("year", "f")]
 
 # Numbers at age
 natage <- as.data.frame(popN(rep))
 natage$unit <- natage$iter <- NULL
 names(natage)[names(natage) == "data"] <- "n"
-natage <- natage[c("year", "season", "area", "age", "n")]
+natage <- natage[c("year", "area", "age", "n")]
 
 # Selectivity
 selectivity <- as.data.frame(sel(rep))
