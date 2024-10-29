@@ -26,15 +26,17 @@ names(fisheries)[names(fisheries) == "region"] <- "area"
 otoliths <- ALK(oto)
 otoliths <- otoliths[otoliths$obs > 0,]
 otoliths <- otoliths[rep(seq_len(nrow(otoliths)), otoliths$obs),]
+otoliths$season <- (1 + otoliths$month) / 3
 otoliths$area <- fisheries$area[otoliths$fishery]
-otoliths <- otoliths[c("year", "month", "area", "age", "length")]
+otoliths <- otoliths[c("year", "season", "area", "age", "length")]
 
 # CPUE data
 cpue <- realisations(frq)
 cpue <- cpue[cpue$fishery %in% 18:20,]  # index fisheries
 cpue <- merge(cpue, fisheries[c("fishery", "area")])
+cpue$season <- (1 + cpue$month) / 3
 cpue$index <- cpue$catch / cpue$effort
-cpue <- cpue[c("year", "month", "fishery", "area", "index")]
+cpue <- cpue[c("year", "season", "fishery", "area", "index")]
 
 # Size data
 size <- freq(frq)
@@ -42,7 +44,9 @@ size <- size[size$freq != -1,]
 
 # Length compositions
 length.comps <- size[!is.na(size$length),]
-length.comps <- length.comps[c("year", "month", "fishery", "length", "freq")]
+length.comps$season <- round((1 + length.comps$month) / 3)
+length.comps <-
+  length.comps[c("year", "season", "month", "fishery", "length", "freq")]
 
 # Write TAF tables
 write.taf(fisheries, dir="data")
