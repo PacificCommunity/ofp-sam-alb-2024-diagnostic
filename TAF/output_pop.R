@@ -75,9 +75,18 @@ natage <- natage[c("year", "area", "age", "n")]
 
 # Selectivity
 selectivity <- as.data.frame(sel(rep))
-names(selectivity)[names(selectivity) == "unit"] <- "fishery"
 names(selectivity)[names(selectivity) == "data"] <- "sel"
-selectivity <- selectivity[c("fishery", "age", "sel")]
+selectivity <- type.convert(selectivity[c("unit", "age", "sel")], as.is=TRUE)
+sel.seasons <- readLines(finalRep("model"))
+sel.seasons <- sel.seasons[grep("selectivity seasons", sel.seasons) + 1]
+sel.seasons <- scan(text=sel.seasons, what=integer(), quiet=TRUE)
+sel.key <- data.frame(unit=seq_len(sum(sel.seasons)),
+                      fishery=rep(seq_along(sel.seasons), sel.seasons),
+                      season=NA_character_)
+sel.key$season[sel.key$fishery %in% which(sel.seasons==4)] <- 1:4
+sel.key$season[sel.key$fishery %in% which(sel.seasons==2)] <- c("1,2", "3,4")
+sel.key$season[sel.key$fishery %in% which(sel.seasons==1)] <- "all"
+selectivity <- merge(sel.key, selectivity)[c("fishery", "season", "age", "sel")]
 
 # Summary
 rec <- aggregate(data~year, as.data.frame(popN(rep)), sum, subset=age==1)
@@ -98,5 +107,5 @@ write.taf(f.aggregate, dir="output")
 write.taf(f.annual, dir="output")
 write.taf(f.stage, dir="output")
 write.taf(natage, dir="output")
-write.taf(selectivity, dir="output")
+write.taf(selectivity, dir="output", quote=TRUE)
 write.taf(summary, dir="output")
