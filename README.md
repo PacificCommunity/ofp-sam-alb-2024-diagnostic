@@ -9,9 +9,9 @@ Download ALB 2024 diagnostic model:
 
 - Clone the **[alb-2024-diagnostic](https://github.com/PacificCommunity/ofp-sam-alb-2024-diagnostic)** repository or download as **[main.zip](https://github.com/PacificCommunity/ofp-sam-alb-2024-diagnostic/archive/refs/heads/main.zip)** file
 
-Download ALB 2024 model ensemble results:
+Download ALB 2024 ensemble results:
 
-- The **[alb-2024-ensemble](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble)** repository includes a **[alb-2024-ensemble-results.zip](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble/releases/download/file/alb-2024-ensemble-results.zip)** file
+- Clone the **[alb-2024-ensemble](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble)** repository or download as **[main.zip](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble/archive/refs/heads/main.zip)** file
 
 ## Reference model
 
