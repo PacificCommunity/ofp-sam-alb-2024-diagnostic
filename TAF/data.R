@@ -33,7 +33,7 @@ otoliths <- otoliths[c("year", "season", "area", "age", "length")]
 # CPUE data
 cpue <- realisations(frq)
 cpue <- cpue[cpue$fishery %in% 18:20,]  # index fisheries
-cpue <- merge(cpue, fisheries[c("fishery", "area")])
+cpue <- merge(cpue, fisheries[c("fishery", "area")])  # area column
 cpue$season <- (1 + cpue$month) / 3
 cpue$index <- cpue$catch / cpue$effort
 cpue <- cpue[c("year", "season", "fishery", "area", "index")]
